@@ -39,6 +39,7 @@ void limpartela(){
     system("clear"); // Se estiver em ambiente Linux
 }
 
+
 void adicionapessoa(){ // FUNÇÃO PARA ADICIONAR PROFESSOR
     cont++;
     char nome1[50];
@@ -141,8 +142,7 @@ void filtrarporcategoria(){ // FUNÇÃO PARA LISTAGEM POR CATEGORIA
 
 void filtrarporpessoa(){ // FUNÇÃO PARA LISTAGEM POR PROFESSOR
     int p, c;
-    
-    while(1 == 1){
+    while(1){
         limpartela(); 
         printf("===================================\n");
         printf("LISTAGEM PARCIAL\n");
@@ -182,7 +182,7 @@ void filtrarporpessoa(){ // FUNÇÃO PARA LISTAGEM POR PROFESSOR
 void listagemparcial(){ //FUNÇÃO PARA SELECIONAR TIPO DE LISTAGEM PARCIAL
     int op, bk = 0;
     while(bk == 0){     // OPÇÕES LISTAGEM PARCIAL
-        system("clear");
+        limpartela();
         printf("===================================\n");
         printf("LISTAGEM PARCIAL\n");
         printf("===================================\n");
@@ -209,6 +209,125 @@ void listagemparcial(){ //FUNÇÃO PARA SELECIONAR TIPO DE LISTAGEM PARCIAL
                 break;
         }
         pausa();
+    }
+}
+
+
+void modificacaototal(){// MODIFICAÇÃO TOTAL DOS DADOS DO PROFESSOR SELECIONADO
+    int p, c;
+    char nome1[50];
+    while(1){
+        limpartela(); 
+        printf("===================================\n");
+        printf("MODIFICAÇÃO TOTAL\n");
+        printf("===================================\n");
+        printf("Selecionar Pessoa:\n");
+        for(c=0; c<=cont; ++c)  // LISTAGEM DE PROFESSORES PARA SELEÇÃO
+            printf("\n[%d] - %s", c, pg[c].nome);
+        printf("\n\nSua Opção: ");
+        scanf("%d", &p);
+        if(p > cont || p < 0){      // VERIFICAÇÃO DE INPUT INVÁLIDO
+            printf("\nOpção Inválida\n");
+            pausa();
+            continue;
+        }
+        else {      // MODIFICAÇÃO DOS DADOS DO PROFESSOR SELECIONADO
+            limpartela();
+            printf("=======================================\n");
+            printf("MODIFICAÇÃO TOTAL - %s\n", pg[p].nome);
+            printf("=======================================\n");
+            printf("\nCódigo: ");
+            scanf("%s", pg[p].codigo);
+            while (getchar() != '\n'); 
+            printf("Nome: ");
+            fgets(nome1, sizeof(nome1), stdin); 
+            nome1[strcspn(nome1, "\n")] = '\0';
+            strcpy(pg[p].nome, nome1);
+            printf("Titulação: ");
+            scanf("%s", pg[p].titulacao);
+            printf("Sexo: ");
+            scanf("%s", pg[p].sexo);
+            //printf("Salário: ");
+            //scanf("%d", &pg.salario);
+            printf("Departamento: ");
+            scanf("%s", pg[p].departamento);
+            pausa();
+            break;
+        }
+    }
+}
+
+
+void modificacaoparcial(){
+    int p, c, bk =0;
+    char nome1[50];
+    while(bk == 0){
+        limpartela(); 
+        printf("===================================\n");
+        printf("MODIFICAÇÃO TOTAL\n");
+        printf("===================================\n");
+        printf("Selecionar Pessoa:\n");
+        for(c=0; c<=cont; ++c)  // LISTAGEM DE PROFESSORES PARA SELEÇÃO
+            printf("\n[%d] - %s", c, pg[c].nome);
+        printf("\n\nSua Opção: ");
+        scanf("%d", &p);
+        if(p > cont || p < 0){      // VERIFICAÇÃO DE INPUT INVÁLIDO
+            printf("\nOpção Inválida\n");
+            pausa();
+            continue;
+        }
+        else {      // MODIFICAÇÃO DOS DADOS DO PROFESSOR SELECIONADO
+            int cat;
+            limpartela();
+            printf("===================================\n");
+            printf("MODIFICAÇÃO PARCIAL\n");
+            printf("===================================\n");
+            printf("Selecionar Categoria:\n\n");
+            printf("[0] - Código\n");
+            printf("[1] - Nome\n");
+            printf("[2] - Titulação\n");
+            printf("[3] - Sexo\n");
+            printf("[4] - Departamento\n");
+            printf("\nSua Opção: ");
+            scanf("%d", &cat);
+            if (cat < 0 || cat > 4) printf("\nOpção Iválida! \n");
+            else {
+                bk = 1;
+                limpartela();
+                printf("=======================================\n");
+                printf("MODIFICAÇÃO PARCIAL - %s\n", pg[p].nome);
+                printf("=======================================\n");
+                switch(cat){
+                case 0:
+                    printf("\nCódigo: ");
+                    scanf("%s", pg[p].codigo);
+                    break;
+                case 1:
+                    char nome1[50];
+                    while (getchar() != '\n');
+                    printf("Nome: ");
+                    fgets(nome1, sizeof(nome1), stdin); 
+                    nome1[strcspn(nome1, "\n")] = '\0';
+                    strcpy(pg[p].nome, nome1);
+                    break;
+                case 2:
+                    printf("Titulação: ");
+                    scanf("%s", pg[p].titulacao);
+                    break;
+                case 3:
+                    printf("Sexo: ");
+                    scanf("%s", pg[p].sexo);
+                    break;
+                case 4:
+                    printf("Departamento: ");
+                    scanf("%s", pg[p].departamento);
+                    break;
+                //printf("Salário: ");
+                //scanf("%d", &pg.salario);
+                }
+            pausa();
+            }
+        }
     }
 }
 
@@ -248,6 +367,12 @@ int main(){     // FUNÇÃO PRINCIPAL - MOSTRA O MENU
                 break;
             case 3:
                 listagemparcial();
+                break;
+            case 4:
+                modificacaototal();
+                break;
+            case 5:
+                modificacaoparcial();
                 break;
             case 99:
                 printf("===================================\n");
