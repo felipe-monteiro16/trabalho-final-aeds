@@ -42,7 +42,7 @@ void limpartela(){
 
 void adicionapessoa(){ // FUNÇÃO PARA ADICIONAR PROFESSOR
     cont++;
-    char nome1[50];
+    char nome1[50], sexo[50], titulacao[10];
     limpartela();
     printf("===================================\n");
     printf("ADICIONANDO PROFESSOR...\n");
@@ -54,10 +54,52 @@ void adicionapessoa(){ // FUNÇÃO PARA ADICIONAR PROFESSOR
     fgets(nome1, sizeof(nome1), stdin); 
     nome1[strcspn(nome1, "\n")] = '\0';
     strcpy(pg[cont].nome, nome1);
-    printf("Titulação: ");
-    scanf("%s", pg[cont].titulacao);
-    printf("Sexo: ");
-    scanf("%s", pg[cont].sexo);
+    // printf("Titulação: ");
+    // scanf("%s", pg[cont].titulacao);
+    while(1){               // VALIDAÇÃO DO Titulação//(GRD, MST, DOU, POS, OUT)
+        printf("Lista de Titulações: [GRD, MST, DOU, POS, OUT]\nTitulação: ");
+        scanf("%s", titulacao);
+
+        if (strcmp(titulacao, "GRD") == 0|| strcmp(titulacao, "grd") == 0){
+            strcpy(pg[cont].titulacao, "GRD");
+            break;
+        } else if(strcmp(titulacao, "MST") == 0 || strcmp(titulacao, "mst") == 0){
+            strcpy(pg[cont].titulacao, "MST");
+            break;
+        } 
+        else if(strcmp(titulacao, "DOU") == 0 || strcmp(titulacao, "dou") == 0){
+            strcpy(pg[cont].titulacao, "DOU");
+            break;
+        } 
+        else if(strcmp(titulacao, "POS") == 0 || strcmp(titulacao, "pos") == 0){
+            strcpy(pg[cont].titulacao, "POS");
+            break;
+        } 
+        else if(strcmp(titulacao, "OUT") == 0 || strcmp(titulacao, "out") == 0){
+            strcpy(pg[cont].titulacao, "OUT");
+            break;
+        } else
+            printf("\nPor favor, digite uma titlação válida \n");
+
+    }
+    
+    
+    
+    while(1){               // VALIDAÇÃO DO SEXO
+        printf("Sexo: ");
+        scanf("%s", sexo);
+        if (strcmp(sexo, "m") == 0|| strcmp(sexo, "M") == 0){
+            strcpy(pg[cont].sexo, "M");
+            // pg[cont].sexo = sexo;
+            break;
+        } else if(strcmp(sexo, "f") == 0 || strcmp(sexo, "F") == 0){
+            strcpy(pg[cont].sexo, "F");
+            break;
+        } else
+            printf("\nPor favor, digite um valor entre [M, F]\n");
+
+    }
+    
     //printf("Salário: ");
     //scanf("%d", &pg.salario);
     printf("Departamento: ");
@@ -215,7 +257,7 @@ void listagemparcial(){ //FUNÇÃO PARA SELECIONAR TIPO DE LISTAGEM PARCIAL
 
 void modificacaototal(){// MODIFICAÇÃO TOTAL DOS DADOS DO PROFESSOR SELECIONADO
     int p, c;
-    char nome1[50];
+    char nome1[50], sexo[50], titulacao[10];
     while(1){
         limpartela(); 
         printf("===================================\n");
@@ -243,10 +285,49 @@ void modificacaototal(){// MODIFICAÇÃO TOTAL DOS DADOS DO PROFESSOR SELECIONAD
             fgets(nome1, sizeof(nome1), stdin); 
             nome1[strcspn(nome1, "\n")] = '\0';
             strcpy(pg[p].nome, nome1);
-            printf("Titulação: ");
-            scanf("%s", pg[p].titulacao);
-            printf("Sexo: ");
-            scanf("%s", pg[p].sexo);
+            
+            
+            while(1){               // VALIDAÇÃO DO Titulação//(GRD, MST, DOU, POS, OUT)
+                printf("Lista de Titulações: [GRD, MST, DOU, POS, OUT]\nTitulação: ");
+                scanf("%s", titulacao);
+        
+                if (strcmp(titulacao, "GRD") == 0|| strcmp(titulacao, "grd") == 0){
+                    strcpy(pg[cont].titulacao, "GRD");
+                    break;
+                } else if(strcmp(titulacao, "MST") == 0 || strcmp(titulacao, "mst") == 0){
+                    strcpy(pg[cont].titulacao, "MST");
+                    break;
+                } 
+                else if(strcmp(titulacao, "DOU") == 0 || strcmp(titulacao, "dou") == 0){
+                    strcpy(pg[cont].titulacao, "DOU");
+                    break;
+                } 
+                else if(strcmp(titulacao, "POS") == 0 || strcmp(titulacao, "pos") == 0){
+                    strcpy(pg[cont].titulacao, "POS");
+                    break;
+                } 
+                else if(strcmp(titulacao, "OUT") == 0 || strcmp(titulacao, "out") == 0){
+                    strcpy(pg[cont].titulacao, "OUT");
+                    break;
+                } else
+                    printf("\nPor favor, digite uma titlação válida \n");
+        
+            }
+    
+            while(1){
+                printf("Sexo: ");
+                scanf("%s", sexo);
+                if (strcmp(sexo, "m") == 0|| strcmp(sexo, "M") == 0){
+                    strcpy(pg[cont].sexo, "M");
+                    // pg[cont].sexo = sexo;
+                    break;
+                } else if(strcmp(sexo, "f") == 0 || strcmp(sexo, "F") == 0){
+                    strcpy(pg[cont].sexo, "F");
+                    break;
+                } else
+                    printf("\nPor favor, digite um valor entre [M, F]\n");
+        
+            }
             //printf("Salário: ");
             //scanf("%d", &pg.salario);
             printf("Departamento: ");
@@ -260,7 +341,7 @@ void modificacaototal(){// MODIFICAÇÃO TOTAL DOS DADOS DO PROFESSOR SELECIONAD
 
 void modificacaoparcial(){
     int p, c, bk =0;
-    char nome1[50];
+    char nome1[50], sexo[50], titulacao[10];
     while(bk == 0){
         limpartela(); 
         printf("===================================\n");
@@ -311,12 +392,47 @@ void modificacaoparcial(){
                     strcpy(pg[p].nome, nome1);
                     break;
                 case 2:
-                    printf("Titulação: ");
-                    scanf("%s", pg[p].titulacao);
+                    while(1){               // VALIDAÇÃO DO Titulação//(GRD, MST, DOU, POS, OUT)
+                        printf("Lista de Titulações: [GRD, MST, DOU, POS, OUT]\nTitulação: ");
+                        scanf("%s", titulacao);
+                
+                        if (strcmp(titulacao, "GRD") == 0|| strcmp(titulacao, "grd") == 0){
+                            strcpy(pg[cont].titulacao, "GRD");
+                            break;
+                        } else if(strcmp(titulacao, "MST") == 0 || strcmp(titulacao, "mst") == 0){
+                            strcpy(pg[cont].titulacao, "MST");
+                            break;
+                        } 
+                        else if(strcmp(titulacao, "DOU") == 0 || strcmp(titulacao, "dou") == 0){
+                            strcpy(pg[cont].titulacao, "DOU");
+                            break;
+                        } 
+                        else if(strcmp(titulacao, "POS") == 0 || strcmp(titulacao, "pos") == 0){
+                            strcpy(pg[cont].titulacao, "POS");
+                            break;
+                        } 
+                        else if(strcmp(titulacao, "OUT") == 0 || strcmp(titulacao, "out") == 0){
+                            strcpy(pg[cont].titulacao, "OUT");
+                            break;
+                        } else
+                            printf("\nPor favor, digite uma titlação válida \n");
+                
+                    }
                     break;
                 case 3:
-                    printf("Sexo: ");
-                    scanf("%s", pg[p].sexo);
+                    while(1){
+                        printf("Sexo: ");
+                        scanf("%s", sexo);
+                        if (strcmp(sexo, "m") == 0|| strcmp(sexo, "M") == 0){
+                            strcpy(pg[cont].sexo, "M");
+                            // pg[cont].sexo = sexo;
+                            break;
+                        } else if(strcmp(sexo, "f") == 0 || strcmp(sexo, "F") == 0){
+                            strcpy(pg[cont].sexo, "F");
+                            break;
+                        } else
+                            printf("\nPor favor, digite um valor entre [M, F]\n");
+                    }
                     break;
                 case 4:
                     printf("Departamento: ");
@@ -330,6 +446,12 @@ void modificacaoparcial(){
         }
     }
 }
+
+
+mostralistafinal(){
+    
+}
+
 
 
 int main(){     // FUNÇÃO PRINCIPAL - MOSTRA O MENU 
@@ -354,6 +476,7 @@ int main(){     // FUNÇÃO PRINCIPAL - MOSTRA O MENU
         " 3 - LISTAGEM PARCIAL DE DADOS\n"
         " 4 - MODIFICAÇÃO TOTAL DE DADOS\n"
         " 5 - MODIFICAÇÃO PARCIAL DE DADOS\n"
+        " 6 - MOSTRAR LISTA FINAL\n"
         "99 - ENCERRAR PROGRAMA\n"
         "===================================\n");
         printf("Sua Opção: ");
@@ -374,6 +497,8 @@ int main(){     // FUNÇÃO PRINCIPAL - MOSTRA O MENU
             case 5:
                 modificacaoparcial();
                 break;
+            case 6:
+                mostralistafinal();
             case 99:
                 printf("===================================\n");
                 printf("        PROGRAMA ENCERRADO\n");
