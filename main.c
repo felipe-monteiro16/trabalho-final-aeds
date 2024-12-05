@@ -255,7 +255,7 @@ void listagemparcial(){ //FUNÇÃO PARA SELECIONAR TIPO DE LISTAGEM PARCIAL
 }
 
 
-void modificacaototal(){// MODIFICAÇÃO TOTAL DOS DADOS DO PROFESSOR SELECIONADO
+void modificacaototal(){ // MODIFICAÇÃO TOTAL DOS DADOS DO PROFESSOR SELECIONADO
     int p, c;
     char nome1[50], sexo[50], titulacao[10];
     while(1){
@@ -449,7 +449,36 @@ void modificacaoparcial(){
 
 
 mostralistafinal(){
+    int c;
+    int m_mst = 0, m_dou = 0, f_mst = 0, f_dou = 0;
+    limpartela(); 
+    printf("===================================\n");
+    printf("            LISTA FINAL\n");
+    printf("===================================\n");
     
+    for(c=0; c<=cont; ++c){
+        if(strcmp(pg[c].sexo, "M") == 0){
+            if(strcmp(pg[c].titulacao, "MST") == 0)
+                m_mst++;
+            if(strcmp(pg[c].titulacao, "DOU") == 0)
+                m_dou++;
+        }else if(strcmp(pg[c].sexo, "F") == 0){
+            if(strcmp(pg[c].titulacao, "MST") == 0)
+                f_mst++;
+            if(strcmp(pg[c].titulacao, "DOU") == 0)
+                f_dou++;
+        }
+    }
+    
+    printf("\nTITU\tMAS\tFEM\n");
+    printf("DOU\t%d\t%d\n", m_dou, f_dou);
+    printf("MST\t%d\t%d\n", m_mst, f_mst);
+    
+    // TITU    MAS     FEM
+    // DOU     12      5
+    // MEST    10      2
+    // TOTAL   22      7
+    pausa();
 }
 
 
